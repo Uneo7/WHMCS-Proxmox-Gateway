@@ -1,6 +1,6 @@
 <?php
 
-require_once 'vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
 define('__ROOTDIR__', substr(dirname(__FILE__), 0, strpos(dirname(__FILE__), 'modules' . DIRECTORY_SEPARATOR . 'servers' . DIRECTORY_SEPARATOR)));
 

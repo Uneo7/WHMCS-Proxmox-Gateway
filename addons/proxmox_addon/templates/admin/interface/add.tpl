@@ -36,7 +36,7 @@
 
 		<div class="form-group">
 			<label for="ip6">IPv6</label>
-			<select name="ip6" id="ip6" class="form-control" required>
+			<select name="ip6" id="ip6" class="form-control">
 				<option value="">Aucun</option>
 				<option value="static">Statique</option>
 				<option value="dhcp">DHCP</option>

@@ -4,7 +4,7 @@ use WHMCS\Database\Capsule;
 use WHMCS\Module\Addon\ProxmoxAddon\Helpers\Dispatcher;
 use WHMCS\Module\Addon\ProxmoxAddon\Models\Whmcs\Queue;
 
-require_once 'vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
 if (!defined("WHMCS")) {
 	die("This file cannot be accessed directly");
@@ -143,11 +143,14 @@ function proxmox_addon_activate()
 					$table->increments('id');
 					$table->integer('service_id');
 					$table->integer('product_id');
+					$table->integer('server_id');
 					$table->string('task');
 					$table->string('status');
 					$table->text('params');
 					$table->string('proxmox');
 					$table->text('message');
+					$table->datetime('updated_at');
+					$table->datetime('created_at');
 				}
 			);
 

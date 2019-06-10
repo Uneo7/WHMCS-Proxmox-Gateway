@@ -25,8 +25,8 @@ abstract class Task implements TaskInterface {
 
 		Request::Login([
 			'hostname' => $server->ipaddress,
-		    'username' => $server->username,
-		    'password' => $password['password'],
+			'username' => $server->username,
+			'password' => $password['password'],
 		]);      
 	}
 
@@ -39,50 +39,51 @@ abstract class Task implements TaskInterface {
 	{
 
 		try {
-	    
-	    	$response = call_user_func_array([$this->nodes, $action], $args);
-	    	if (!$response->data) {
+		
+			$response = call_user_func_array([$this->nodes, $action], $args);
+			if (!$response->data) {
 
-	    		return [
-	    			null,
-	    			$response->errors ? 'API responded with an unknown error (See logs module for more details).' : 'API responded with an unknown error.'
-	    		];
+				logModuleCall(
+					'proxmox_addon',
+					$action,
+					$args,
+					$response,
+					$response,
+					[]
+				);
 
-	    		if ($response->errors) {
-	    			logModuleCall(
-			            'proxmox_addon',
-			            __FUNCTION__,
-			            $params,
-			            'API responded with an unknown error.'
-			        );
-	    		}
-	    	} 
+				return [
+					null,
+					$response->errors ? 'API responded with an unknown error (See logs module for more details).' : 'API responded with an unknown error.'
+				];
 
-	    	return [
-	    		$response->data,
-	    	];
+			}
 
-	    } catch (Exception $e) {
+			return [
+				$response->data,
+			];
 
-	        $errorMsg = $e->getMessage();
+		} catch (Exception $e) {
 
-	        if ($e->getMessage() === 'Request params empty') {
-	            $errorMsg = 'Promox is unreachable !';
-	        }
+			$errorMsg = $e->getMessage();
 
-	        logModuleCall(
-	            'proxmox_addon',
-	            __FUNCTION__,
-	            $params,
-	            $e->getMessage(),
-	            $e->getTraceAsString()
-	        );
+			if ($e->getMessage() === 'Request params empty') {
+				$errorMsg = 'Promox is unreachable !';
+			}
 
-	        return [
-	    		null,
-	    		$errorMsg
-	    	];
-	    }
+			logModuleCall(
+				'proxmox_addon',
+				__FUNCTION__,
+				$params,
+				$e->getMessage(),
+				$e->getTraceAsString()
+			);
+
+			return [
+				null,
+				$errorMsg
+			];
+		}
 
 	}
 

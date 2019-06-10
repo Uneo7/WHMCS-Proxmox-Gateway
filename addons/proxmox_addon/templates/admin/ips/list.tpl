@@ -29,7 +29,7 @@
 				<td>{$ip->gateway}</td>
 				<td>{$ip->cluster->name}</td>
 				<td>{if $ip->active}<span class="label label-success">Publique</span>{else}<span class="label label-danger">Privée</span>{/if}</td>
-				<td>{if !$ip->used}<span class="label label-success">Libre</span>{else}<a href="clientsservices.php?id='.$ip->service_id.'">Voir</a>{/if}</td>
+				<td>{if !$ip->used}<span class="label label-success">Libre</span>{else}<a href="clientsservices.php?id={$ip->service_id}">Voir</a>{/if}</td>
 				<td>
 					<div class="btn-group">
 						<a onclick="return confirm('Voulez vous vraiment supprimer cette ip ? ')" href="{$route->to('ip', ['method' => 'delete', 'id' => $ip->id])}" class="btn btn-xs btn-danger"><i class="fa fa-trash fa-fw"></i></a>

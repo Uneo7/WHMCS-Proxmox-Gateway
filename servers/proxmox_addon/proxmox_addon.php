@@ -4,7 +4,7 @@ if (!defined("WHMCS")) {
     die("This file cannot be accessed directly");
 }
 
-require_once 'vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
 use WHMCS\Module\Addon\ProxmoxAddon\Models\Whmcs\Queue;
 
@@ -12,10 +12,10 @@ use Proxmox\Request;
 use Proxmox\Cluster;
 use Proxmox\Nodes;
 
-require_once 'includes/actions.php';
-require_once 'includes/admin.php';
-require_once 'includes/client.php';
-require_once 'includes/account.php';
+require_once __DIR__ . '/includes/actions.php';
+require_once __DIR__ . '/includes/admin.php';
+require_once __DIR__ . '/includes/client.php';
+require_once __DIR__ . '/includes/account.php';
 
 function log_queue($service, $action, $error) {
 

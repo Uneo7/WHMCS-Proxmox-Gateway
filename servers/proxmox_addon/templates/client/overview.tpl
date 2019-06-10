@@ -114,8 +114,8 @@
 
 	<div id="install" class="hidden text-center" style="margin-top: 30px;">
 		<i class="fas fa-cog fa-spin fa-5x"></i>
-		<h2>Get a <i class="fas fa-coffee"></i> and relax, we're dealing with the boring stuff.</h2>
-		<p><i class="fas fa-coffee"></i> Get a cofee and relax</p>
+		<h2>Installation in progress ...</h2>
+		<p>Get a <i class="fas fa-coffee"></i> and relax, we're dealing with the boring stuff.</p>
 	</div>
 
 	<div id="reinstall" class="hidden text-center" style="margin-top: 30px;">

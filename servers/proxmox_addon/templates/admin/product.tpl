@@ -36,10 +36,12 @@
 {if $product->configoption4}
 {$product->configoption4}
 {else}
+{literal}
 Client: {$client_name}  (ID: {$client_id})
 Email: {$client_email}
 Service ID: {$service_id}
 Product:  {$product_name} (ID: {$product_id})
+{/literal}
 {/if}
     	</textarea>
     </td>

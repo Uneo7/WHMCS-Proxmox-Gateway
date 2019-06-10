@@ -132,39 +132,42 @@ function json($data)
 function promox_addon_datas($params)
 {
 	$vm = Vm::where('service_id', $params['serviceid'])->first();
-	$templates = Template::select('id', 'name')->where('cluster_id', $vm->node->cluster_id)->get();
-	$vnc = new VncTask($vm->node->server);
-	$status = new RunningTask($vm->node->server);
 
 	$reinstall = Task::where([
-		['service_id', '=', $vm->service_id],
+		['service_id', '=', $params['serviceid']],
 		['task', '=', 'resinstallLxc'],
 		['status', '<', 3]
 	])->first();
 
 	$install = Task::where([
-		['service_id', '=', $vm->service_id],
+		['service_id', '=', $params['serviceid']],
 		['task', '=', 'createLxc'],
 		['status', '<', 3]
 	])->first();
 
-	$tasks =  Task::select('task', 'status', 'message', 'created_at', 'updated_at')
+	$tasks = Task::select('task', 'status', 'message', 'created_at', 'updated_at')
 		->where([
-			['service_id', '=', $vm->service_id],
+			['service_id', '=', $params['serviceid']],
 		])
 		->get();
+
+	if (!$vm) {
+		json([
+			'success' => true,
+			'reinstall' => (bool)$reinstall,
+			'install' => (bool)$install,
+			'tasks' => $tasks
+		]);
+	}
+
+	$templates = Template::select('id', 'name')->where('cluster_id', $vm->node->cluster_id)->get();
+	$vnc = new VncTask($vm->node->server);
+	$status = new RunningTask($vm->node->server);	
 
 	list($status, $error) = $status->execute([
 		'id' => $vm->vmid,
 		'node' => $vm->node->node,
 	]);
-
-	if ($error) {
-		json([
-			'success' => false,
-			'error' => $error
-		]);
-	}
 
 	if ($status->status === "running") {
 		list($url, $error) = $vnc->execute([
