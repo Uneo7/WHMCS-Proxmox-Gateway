@@ -47,7 +47,7 @@ class VncTask extends Task
 
 		if ($error) return [null, $error];
 
-		return ["https://{$this->server->ipaddress}:8006/novnc/mgnovnc.html?vncticket={$vnc->data->ticket}&token={$ticket->data->ticket}&port={$vnc->data->port}&node=promox&vmid={$params['id']}&virtualization=lxc&UserName={$vnc->data->user}&CSRFPreventionToken={$ticket->data->CSRFPreventionToken}"];
+		return ["https://{$this->server->ipaddress}:8006/novnc/console.html?vncticket={$vnc->data->ticket}&token={$ticket->data->ticket}&port={$vnc->data->port}&node={$params['node']}&vmid={$params['id']}&virtualization=lxc&UserName={$vnc->data->user}&CSRFPreventionToken={$ticket->data->CSRFPreventionToken}"];
 	}
 
 }

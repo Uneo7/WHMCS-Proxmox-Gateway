@@ -20,10 +20,10 @@ var UI;
     };
     Util.load_scripts(["webutil.js"]);
     
-    UI = {
+    UI  = {
         load: function (callback) {
             var token = WebUtil.getQueryVar('token', null);
-            var console = WebUtil.getQueryVar('console', null);
+            var terminal = WebUtil.getQueryVar('console', null);
             if (token) {
                 WebUtil.createCookie('PVEAuthCookie', token, 1);
             }
@@ -40,13 +40,12 @@ var UI;
                 consoleType = WebUtil.getQueryVar('virtualization');
             }
 
-            if (console === "novnc") {
-                console = "novnc=1"
+            if (terminal === "novnc") {
+                terminal = "novnc=1"
             } else {
-                console = "xtermjs=1"
+                terminal = "xtermjs=1"
             }
-
-            window.location = "../?console=" + consoleType + "&" + console + "&vmid=" + WebUtil.getQueryVar('vmid') + "&vmname=" + WebUtil.getQueryVar('vmid') + "&node=" + WebUtil.getQueryVar('node') + "";
+            window.location = "../?console=" + consoleType + "&" + terminal + "&vmid=" + WebUtil.getQueryVar('vmid') + "&vmname=" + WebUtil.getQueryVar('vmid') + "&node=" + WebUtil.getQueryVar('node') + "";
         },
         updateState: function (rfb, state, oldstate, msg) {
             var klass;
