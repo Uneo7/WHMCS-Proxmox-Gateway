@@ -21,7 +21,9 @@ add_hook('ClientAreaSecondaryNavbar', 1, function (MenuItem $secondarySidebar)
 
 add_hook('ClientAreaPrimarySidebar', 1, function (MenuItem $menu)
 {
-
+	$client = Menu::context('client');
+	if (!$client) return;
+	
 	if ($_REQUEST['action'] !== 'productdetails') return;
 
 	$service = Service::find($_REQUEST['id']);
