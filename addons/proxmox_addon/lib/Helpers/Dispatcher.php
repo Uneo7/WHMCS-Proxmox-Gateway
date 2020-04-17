@@ -28,7 +28,8 @@ class Dispatcher {
         $method = $this->method . 'GetAction';
         if ($_POST) $method = $this->method . 'PostAction';
 
-        $class = "WHMCS\Module\Addon\ProxmoxAddon\Controllers\\$namespace\\{$this->action}Controller";
+        $controller = ucfirst($this->action);
+        $class = "WHMCS\Module\Addon\ProxmoxAddon\Controllers\\$namespace\\{$controller}Controller";
 
         if (class_exists($class)) {
             $class = new $class(
