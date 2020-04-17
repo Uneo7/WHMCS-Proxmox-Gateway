@@ -181,11 +181,13 @@ function proxmox_addon_deactivate()
 {
 	try {
 		Capsule::schema()->dropIfExists('mod_promox_addon_ips');
+		Capsule::schema()->dropIfExists('mod_promox_addon_vms');
 		Capsule::schema()->dropIfExists('mod_promox_addon_clusters');
 		Capsule::schema()->dropIfExists('mod_promox_addon_templates');
-		Capsule::schema()->dropIfExists('mod_promox_addon_servers');
 		Capsule::schema()->dropIfExists('mod_promox_addon_interfaces');
+		Capsule::schema()->dropIfExists('mod_promox_addon_servers');
 		Capsule::schema()->dropIfExists('mod_promox_addon_tasks');
+		Capsule::schema()->dropIfExists('mod_promox_ssh_key');
 
 		return [
 			'status' => 'success',
